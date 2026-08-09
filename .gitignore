@@ -1,0 +1,11 @@
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# editors
+.vscode/
+.idea/
+
+# scratch / test harnesses
+_*.html

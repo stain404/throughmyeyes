@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THROUGH MY EYES — Chapter 1</title>
+
+<!-- Retro pixel font. Needs internet on first load; falls back to a plain
+     monospace font if offline (see --pixel-font in style.css). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="stage">
+
+  <canvas id="game-canvas" width="960" height="600"></canvas>
+
+  <!-- DIALOGUE BOX (shared by every scene — speech + thought modes) -->
+  <div id="dialogue-box">
+    <div class="dlg-speaker"></div>
+    <div class="dlg-text"></div>
+    <div class="dlg-continue">▼ [E]</div>
+  </div>
+
+  <!-- PHONE NOTIFICATION POPUP (Scene A) -->
+  <div id="phone-notification">
+    <div class="notif-icon">IG</div>
+    <div class="notif-text"></div>
+  </div>
+
+  <!-- INSTAGRAM-STYLE FOLLOWING LIST (Scene B) -->
+  <div id="ig-list-overlay" class="phone-overlay">
+    <div class="phone-header">
+      <span>Following</span>
+      <button class="ig-close">✕</button>
+    </div>
+    <div class="ig-list"></div>
+  </div>
+
+  <!-- INSTAGRAM-STYLE PROFILE VIEW (Scene B) -->
+  <div id="ig-profile-overlay" class="phone-overlay">
+    <div class="phone-header">
+      <span>Profile</span>
+      <button class="ig-close">✕</button>
+    </div>
+    <div class="phone-body">
+      <div class="ig-profile-avatar"></div>
+      <div class="ig-profile-name"></div>
+      <div class="ig-profile-stats">
+        <div class="ig-stat"><b>142</b>posts</div>
+        <div class="ig-stat"><b>1,204</b>followers</div>
+        <div class="ig-stat"><b>318</b>following</div>
+      </div>
+      <button class="ig-follow-btn">Following ✓</button>
+    </div>
+  </div>
+
+  <!-- GROUP-CHAT LOG (Chapter 3) — reuses the .phone-overlay / .phone-header
+       styling from the Chapter 1 phone UI so it reads as the same phone -->
+  <div id="chat-overlay" class="phone-overlay">
+    <div class="phone-header">
+      <span class="chat-title"></span>
+      <span class="chat-hint">▼ [E]</span>
+    </div>
+    <div class="chat-log"></div>
+  </div>
+
+  <!-- END OF CHAPTER CARD -->
+  <div id="end-card">
+    <div class="endcard-title"></div>
+    <div class="endcard-subtitle"></div>
+    <div class="endcard-prompt">Press any key to continue...</div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     Script load order matters: core systems, then editable data,
+     then scenes (which use the systems + data), then main.js last
+     (which wires everything together and starts the loop).
+     ============================================================ -->
+<script src="js/sprite.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/fader.js"></script>
+<script src="js/sceneManager.js"></script>
+<script src="js/phoneUI.js"></script>
+<script src="js/endCard.js"></script>
+<script src="js/data.js"></script>
+<script src="js/data_ch2.js"></script>
+<script src="js/data_ch3.js"></script>
+<script src="js/data_ch4.js"></script>
+<script src="js/scenes/sceneA_road.js"></script>
+<script src="js/scenes/sceneB_home.js"></script>
+<script src="js/scenes/ch2_restaurant.js"></script>
+<script src="js/scenes/ch3_groupchat.js"></script>
+<script src="js/scenes/ch4_cafe.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
