@@ -26,6 +26,18 @@ TME.Fader = {
     this._holdDraw = null;
   },
 
+  // Snap straight to a given opacity and drop any pending fade, callback or
+  // hold-draw. Used when jumping between chapters out of order (see
+  // js/chapterSelect.js), where whatever the last scene left mid-fade is
+  // no longer wanted.
+  reset(alpha){
+    this.alpha = alpha || 0;
+    this._target = this.alpha;
+    this._speed = 0;
+    this._onDone = null;
+    this._holdDraw = null;
+  },
+
   update(dt){
     if (this.alpha === this._target) return;
     const dir = this._target > this.alpha ? 1 : -1;

@@ -64,6 +64,7 @@ window.TME = window.TME || {};
     profileOverlay: document.getElementById("ig-profile-overlay")
   });
   TME.EndCard.init(document.getElementById("end-card"));
+  TME.ChapterSelect.init(document.getElementById("chapter-select"));
 
   // ---- register scenes & start Chapter 1 ----
   TME.SceneManager.register("sceneA", TME.SceneA);   // Ch1 - The Road
@@ -75,7 +76,9 @@ window.TME = window.TME || {};
   //   TME.SceneManager.register("Ch5", TME.Ch5);
   // Chapter 4's end card already hands off to it via TME.goToChapter().
 
-  TME.SceneManager.goTo("sceneA");
+  // Open on the chapter menu rather than dropping straight into Chapter 1.
+  // Picking a chapter there is what starts a scene (see js/chapterSelect.js).
+  TME.ChapterSelect.show();
 
   // ---- chapter chain: Ch1 (sceneA -> sceneB) -> Ch2_Restaurant -> ... ----
   // Chapter 1 hands off through the hook left in js/endCard.js; later
@@ -92,11 +95,22 @@ window.TME = window.TME || {};
   };
 
   // ---- global input router ----
-  // Priority: end card > dialogue box > phone UI > current scene.
+  // Priority: chapter select > end card > dialogue box > phone UI > scene.
   // Dialogue (including an internal monologue shown over the phone
   // profile view, e.g. Scene B) must always be able to receive [E] to
   // advance, even while a phone overlay is technically still open behind it.
   window.addEventListener("keydown", (e) => {
+    if (TME.ChapterSelect.active){ TME.ChapterSelect.handleKey(e); return; }
+
+    // [Esc] reopens the chapter menu from anywhere. Checked before the
+    // dialogue box, which would otherwise swallow the key without using it.
+    // The exception is an open phone overlay, where Esc already means
+    // "close this", and the end card, which is a deliberate pause.
+    if (e.key === "Escape" && !TME.EndCard.active && !TME.PhoneUI.isAnyOpen()){
+      TME.ChapterSelect.show();
+      return;
+    }
+
     if (TME.EndCard.active){ TME.EndCard.handleKey(e); return; }
     if (TME.dialogueBox.active){ TME.dialogueBox.handleKey(e); return; }
     if (TME.PhoneUI.isAnyOpen()){ TME.PhoneUI.handleKey(e); return; }

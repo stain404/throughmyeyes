@@ -31,6 +31,17 @@ TME.SpriteSheet = class SpriteSheet {
   }
 };
 
+// Shared sheet cache, keyed by character name. Scenes must be enterable in
+// any order (the chapter menu can drop you straight into Chapter 4), so a
+// scene must never cache "its" sheets as one all-or-nothing bundle — the next
+// scene to run would find a half-filled cache and build sprites with
+// undefined sheets. Ask for each sheet by name instead.
+TME.sheet = function(key, config){
+  TME._sheets = TME._sheets || {};
+  if (!TME._sheets[key]) TME._sheets[key] = new TME.SpriteSheet(config);
+  return TME._sheets[key];
+};
+
 TME.AnimatedSprite = class AnimatedSprite {
   constructor(sheet, x, y, w, h, placeholderColor){
     this.sheet = sheet;

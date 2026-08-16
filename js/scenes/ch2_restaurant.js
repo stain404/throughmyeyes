@@ -30,22 +30,23 @@ TME.Ch2_Restaurant = {
 
     const D = TME.DataCh2;
 
-    // SWAP REAL SPRITES HERE — cached on TME so re-entering doesn't reload.
-    TME.ch2Sheets = TME.ch2Sheets || {
-      cousin: new TME.SpriteSheet(D.SHEETS.COUSIN),
-      bisma:  new TME.SpriteSheet(D.SHEETS.BISMA),
-      friend: new TME.SpriteSheet(D.SHEETS.FRIEND),
-      hamza:  new TME.SpriteSheet(D.SHEETS.HAMZA)
+    // SWAP REAL SPRITES HERE — fetched by name from the shared cache in
+    // js/sprite.js, so this scene can be entered in any order.
+    const sheets = {
+      cousin: TME.sheet("cousin",     D.SHEETS.COUSIN),
+      bisma:  TME.sheet("bisma",      D.SHEETS.BISMA),
+      friend: TME.sheet("bismaFriend", D.SHEETS.FRIEND),
+      hamza:  TME.sheet("hamza",      D.SHEETS.HAMZA)
     };
 
     // ---- cast -----------------------------------------------------------
     // Zaeem reuses the Chapter 1 sheet built in main.js.
-    this.zaeem  = new TME.AnimatedSprite(TME.zaeemSheet,        92, 352, 46, 62, D.COLORS.ZAEEM);
-    this.cousin = new TME.AnimatedSprite(TME.ch2Sheets.cousin, 158, 352, 46, 62, D.COLORS.COUSIN);
-    this.bisma  = new TME.AnimatedSprite(TME.ch2Sheets.bisma,  648, 320, 46, 62, D.COLORS.BISMA);
+    this.zaeem  = new TME.AnimatedSprite(TME.zaeemSheet,  92, 352, 46, 62, D.COLORS.ZAEEM);
+    this.cousin = new TME.AnimatedSprite(sheets.cousin,  158, 352, 46, 62, D.COLORS.COUSIN);
+    this.bisma  = new TME.AnimatedSprite(sheets.bisma,   648, 320, 46, 62, D.COLORS.BISMA);
     // broader build than the others — the placeholder scales to w/h
-    this.friend = new TME.AnimatedSprite(TME.ch2Sheets.friend, 574, 320, 58, 62, D.COLORS.FRIEND);
-    this.hamza  = new TME.AnimatedSprite(TME.ch2Sheets.hamza,  -60, 366, 46, 62, D.COLORS.HAMZA);
+    this.friend = new TME.AnimatedSprite(sheets.friend,  574, 320, 58, 62, D.COLORS.FRIEND);
+    this.hamza  = new TME.AnimatedSprite(sheets.hamza,   -60, 366, 46, 62, D.COLORS.HAMZA);
 
     this.zaeem.setAnimation("idle");
     this.cousin.setAnimation("idle");

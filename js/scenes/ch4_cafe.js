@@ -29,22 +29,22 @@ TME.Ch4_Cafe = {
     this.W = W; this.H = H;
     const D = TME.DataCh4;
 
-    // SWAP REAL SPRITES HERE
-    TME.ch4Sheets = TME.ch4Sheets || {
-      alfiya: new TME.SpriteSheet(D.SHEETS.ALFIYA),
-      child:  new TME.SpriteSheet(D.SHEETS.CHILD)
+    // SWAP REAL SPRITES HERE — by name from the shared cache in js/sprite.js.
+    // Bisma's sheet is defined in Chapter 2's data but shared through the
+    // cache, so this scene works whether or not Chapter 2 has been played.
+    const sheets = {
+      bisma:  TME.sheet("bisma",  TME.DataCh2.SHEETS.BISMA),
+      alfiya: TME.sheet("alfiya", D.SHEETS.ALFIYA),
+      child:  TME.sheet("child",  D.SHEETS.CHILD)
     };
-    // Bisma's sheet comes from Chapter 2 if that chapter has run; build it
-    // here otherwise so this scene can be started on its own.
-    if (!TME.ch2Sheets) TME.ch2Sheets = { bisma: new TME.SpriteSheet(TME.DataCh2.SHEETS.BISMA) };
 
-    this.zaeem  = new TME.AnimatedSprite(TME.zaeemSheet,       372, 300, 46, 62, D.COLORS.ZAEEM);
-    this.bisma  = new TME.AnimatedSprite(TME.ch2Sheets.bisma,  498, 300, 46, 62, D.COLORS.BISMA);
+    this.zaeem  = new TME.AnimatedSprite(TME.zaeemSheet, 372, 300, 46, 62, D.COLORS.ZAEEM);
+    this.bisma  = new TME.AnimatedSprite(sheets.bisma,   498, 300, 46, 62, D.COLORS.BISMA);
     // a little broader, and in an abaya — see `outfit` in js/sprite.js
-    this.alfiya = new TME.AnimatedSprite(TME.ch4Sheets.alfiya, 556, 300, 56, 62, D.COLORS.ALFIYA);
+    this.alfiya = new TME.AnimatedSprite(sheets.alfiya,  556, 300, 56, 62, D.COLORS.ALFIYA);
     this.alfiya.outfit = "abaya";
     // small: the placeholder scales to w/h, so a short sprite reads as a kid
-    this.child  = new TME.AnimatedSprite(TME.ch4Sheets.child,  980, 336, 32, 44, D.COLORS.CHILD);
+    this.child  = new TME.AnimatedSprite(sheets.child,   980, 336, 32, 44, D.COLORS.CHILD);
 
     this.zaeem.setAnimation("walk-right");
     this.bisma.setAnimation("idle");
