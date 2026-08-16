@@ -117,14 +117,14 @@ TME.DataCh2 = {
   narration_intro: [
     "Almost a year passed after Samaara.",
     "Someone added him to a group chat on Instagram. He knew the names in it. Bisma was one of them — he'd read it a hundred times and never once typed anything to her. He talked to Alisha instead, and left it at that.",
-    "Then one afternoon he was sitting outside Al Broaster King with his cousin, and none of that mattered."
+    "Then one evening, a little after eight, he was sitting outside Al Broaster King with his cousin, and none of that mattered."
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 1: killing time with the cousin at the left table.
   // --------------------------------------------------------------------
   banter: [
-    { speaker: "Cousin", text: "Bola tha na andar baithte hain. Yahan dhoop lag rahi hai." },
+    { speaker: "Cousin", text: "Bola tha na andar baithte hain. Yahan machchar kaat rahe hain." },
     { speaker: "Zaeem",  text: "Andar fan nahi chalta. Yahan hawa toh aati hai." },
     { speaker: "Cousin", text: "Hawa. Ye Oshiwara hai bhai. Yahan hawa nahi, traffic hai." },
     { speaker: "Zaeem",  text: "Same cheez hai." }
@@ -188,7 +188,7 @@ TME.DataCh2 = {
   // line here landing against the closing narration.
   // --------------------------------------------------------------------
   monologue_romantic: [
-    { speaker: "Zaeem (thinking)", text: "The light's coming in sideways off the road. It's on her. Of course it's on her." },
+    { speaker: "Zaeem (thinking)", text: "The shop light is falling straight onto her table. Of course it is." },
     { speaker: "Zaeem (thinking)", text: "Wo apne baalon ko kaan ke peeche kar rahi hai aur mujhe laga main saans lena bhool gaya." },
     { speaker: "Zaeem (thinking)", text: "Main ghar jaake ye bhool nahi paunga. Pata hai mujhe." },
     { speaker: "Zaeem (thinking)", text: "Kisi din shayad puchh lunga uska naam." },

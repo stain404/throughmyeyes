@@ -58,7 +58,12 @@ TME.DataCh4 = {
     CHILD:  "#8fe3c0"
   },
 
-  cafeName: "LOVE & LATTE",
+  // #EDIT-SIGN — the shopfront board. Devanagari renders through a system
+  // font fallback (Nirmala UI on Windows).
+  sign: {
+    hindi:   "लव अँन्ड लाते",
+    english: "Love & Latte"
+  },
 
   // --------------------------------------------------------------------
   // #EDIT-NARRATION — opening cards, over black, before the cafe fades in.
@@ -66,7 +71,7 @@ TME.DataCh4 = {
   narration_intro: [
     "Then one day she texted him first.",
     "Not a roast, not a threat, not a reply to something in the group. Just: are you free, can we meet.",
-    "Love and Latte. He was early. He walked past it once to avoid being early."
+    "Love and Latte, a little past nine. He was early, so he walked past it once to avoid being early."
   ],
 
   // --------------------------------------------------------------------
@@ -96,75 +101,87 @@ TME.DataCh4 = {
   ],
 
   // --------------------------------------------------------------------
-  // #EDIT-DIALOGUE — beat 3: what they're actually into.
+  // #EDIT-DIALOGUE — beat 3: what they're actually into. The small boy is
+  // already doing laps between his parents' table and theirs while this runs.
   // --------------------------------------------------------------------
   interests: [
     { speaker: "Bisma", text: "Okay so what do you actually do. Jab tu online annoying nahi ho raha hota." },
     { speaker: "Zaeem", text: "That IS the hobby." },
     { speaker: "Bisma", text: "Seriously." },
     { speaker: "Zaeem", text: "I draw. Badly. Bohot music sunta hoon. Tu bata?" },
-    { speaker: "Bisma", text: "Painting obviously. Aur padhti hoon — main bohot ajeeb cheezein padhti hoon." },
+    { speaker: "Bisma", text: "Painting. Aur padhna — main bohot ajeeb cheezein padhti hoon." },
     { speaker: "Zaeem", text: "Define ajeeb." },
-    { speaker: "Bisma", text: "Not yet. Pehle thoda trust build karte hain." },
-    { speaker: "Zaeem", text: "That's the most threatening thing you've ever said to me and you once offered to beat me up in front of my mother." }
+    { speaker: "Bisma", text: "Not yet. Pehle thoda trust build karte hain." }
   ],
 
   // --------------------------------------------------------------------
-  // #EDIT-DIALOGUE — beat 4: the small boy who adopted their table.
+  // #EDIT-DIALOGUE — beat 4: she notices the boy doing laps, and hands him
+  // her phone unprompted.
   // --------------------------------------------------------------------
-  child_arrives: [
-    { speaker: "Small boy", text: "Hi." },
-    { speaker: "Zaeem",     text: "...hi." },
-    { speaker: "Small boy", text: "Ye aapki behen hai?" },
-    { speaker: "Bisma",     text: "Nahi." },
-    { speaker: "Small boy", text: "Ohh." }
-  ],
-
-  child_returns: [
-    { speaker: "Small boy", text: "Aapke paas phone hai?" },
-    { speaker: "Bisma",     text: "Hai. Billi ke video dekhega?" },
-    { speaker: "Small boy", text: "HAAN" }
+  boy_and_phone: [
+    { speaker: "Bisma",     text: "Ye bachcha teesri baar aa chuka hai." },
+    { speaker: "Zaeem",     text: "Uske parents wahan baithe hain. Usko humari table zyada interesting lag rahi hai." },
+    { speaker: "Bisma",     text: "Aye. Tujhe billiyan pasand hain?" },
+    { speaker: "Small boy", text: "HAAN" },
+    { speaker: "Bisma",     text: "Le. Baith yahan." },
+    { speaker: "Small boy", text: "aur laga do" }
   ],
 
   // --------------------------------------------------------------------
-  // #EDIT-DIALOGUE — beat 5: cats, then Harry Potter, then the piano.
+  // #EDIT-DIALOGUE — beat 5: Harry Potter, and the piano.
   // --------------------------------------------------------------------
-  cats_and_potter: [
-    { speaker: "Bisma", text: "Mujhe ek cat chahiye. Bohot buri tarah se chahiye." },
-    { speaker: "Zaeem", text: "Toh le le." },
-    { speaker: "Bisma", text: "Ghar pe allowed nahi hai." },
-    { speaker: "Zaeem", text: "Chupke se le le." },
-    { speaker: "Bisma", text: "That is genuinely the worst advice anyone has ever—" },
-    { speaker: "Bisma", text: "Ruk. Ye sound. Ye Harry Potter wala hai na?" },
+  potter: [
+    { speaker: "Bisma", text: "Ye sound sun. Ye Harry Potter wala hai na?" },
     { speaker: "Zaeem", text: "Wait. Are you a Potter person?" },
     { speaker: "Bisma", text: "Obviously. Ravenclaw. Argument nahi karna." },
     { speaker: "Zaeem", text: "I wasn't going to." },
     { speaker: "Bisma", text: "Main chhoti thi na, maine piano pe theme seekha tha. Hedwig's Theme." },
     { speaker: "Zaeem", text: "You did NOT." },
-    { speaker: "Bisma", text: "Abhi bhi bajaa sakti hoon. Shayad. Thoda sa." },
-    { speaker: "Zaeem", text: "Thoda sa is enough. Thoda sa is plenty." }
+    { speaker: "Bisma", text: "Abhi bhi bajaa sakti hoon. Shayad. Thoda sa." }
   ],
 
   monologue_piano: [
-    { speaker: "Zaeem (thinking)", text: "She learnt Hedwig's Theme when she was nine and said it like it was nothing." },
+    { speaker: "Zaeem (thinking)", text: "She learnt Hedwig's Theme at nine and said it like it was nothing." },
     { speaker: "Zaeem (thinking)", text: "Ek din wo mere liye bajayegi. Maine decide kar liya hai." }
   ],
 
   // --------------------------------------------------------------------
-  // #EDIT-DIALOGUE — beat 6: Hamid, of all people.
+  // #EDIT-DIALOGUE — beat 6: history.
+  // --------------------------------------------------------------------
+  history: [
+    { speaker: "Bisma", text: "Mujhe history bohot pasand hai. Like actually pasand." },
+    { speaker: "Zaeem", text: "School wali history?" },
+    { speaker: "Bisma", text: "Nahi nahi. Asli wali. Log kaise rehte the, kya pehente the, kya khaate the." },
+    { speaker: "Bisma", text: "Har ek chhoti cheez ke peeche poori kahani hoti hai. Wahi acha lagta hai mujhe." },
+    { speaker: "Zaeem", text: "Tu mar chuke logon ke baare mein aise baat karti hai jaise wo padosi hain." },
+    { speaker: "Bisma", text: "Haan toh?" }
+  ],
+
+  // --------------------------------------------------------------------
+  // #EDIT-DIALOGUE — beat 7: he points out where he lives.
+  // --------------------------------------------------------------------
+  my_building: [
+    { speaker: "Zaeem", text: "Wo dekh. Gali ke corner pe." },
+    { speaker: "Bisma", text: "Kaunsi?" },
+    { speaker: "Zaeem", text: "Cream wali. Chhat pe paani ki tanki dikh rahi hai na. Wahan rehta hoon main." },
+    { speaker: "Bisma", text: "Itna paas?!" },
+    { speaker: "Zaeem", text: "Poora saal. Tu group chat mein thi aur main do gali door baitha tha." }
+  ],
+
+  // --------------------------------------------------------------------
+  // #EDIT-DIALOGUE — beat 8: Hamid, and the thing about his dad.
   // --------------------------------------------------------------------
   hamid_talk: [
-    { speaker: "Bisma", text: "Achha ek minute — tu Hamid ko jaanta hai na?" },
-    { speaker: "Zaeem", text: "Hamid? Burgman wala Hamid?" },
-    { speaker: "Bisma", text: "Haan! Family friend hai mera. Bachpan se." },
-    { speaker: "Zaeem", text: "HAMID is your family friend." },
-    { speaker: "Bisma", text: "Kyun, kya hua?" },
-    { speaker: "Zaeem", text: "Bisma wo Millat Nagar ka gunda hai." },
-    { speaker: "Bisma", text: "HAAN WO GUNDA HI HAI. Main bhi yahi keh rahi hoon!" },
-    { speaker: "Bisma", text: "Ghar mein sabko lagta hai wo sharif bachcha hai. Poora Millat jaanta hai wo kya cheez hai." },
-    { speaker: "Zaeem", text: "Aunty ko koi bataata kyun nahi." },
-    { speaker: "Bisma", text: "Kaun bataayega? Uski maa se? Tu bataayega?" },
-    { speaker: "Zaeem", text: "...nahi." }
+    { speaker: "Bisma", text: "Achha — tu Hamid ko jaanta hai na?" },
+    { speaker: "Zaeem", text: "Millat Nagar ka Hamid? Sab jaante hain usko." },
+    { speaker: "Bisma", text: "Wo mera close friend hai. Bachpan se." },
+    { speaker: "Zaeem", text: "...achha." },
+    { speaker: "Bisma", text: "Bol na. Kya hai?" },
+    { speaker: "Zaeem", text: "Mere papa ne usko ek baar kuch karte hue pakad liya tha. Usne maafi bhi maang li thi." },
+    { speaker: "Zaeem", text: "Us din se wo mere papa se nafrat karta hai. Maafi khud maangi thi, phir bhi." },
+    { speaker: "Bisma", text: "Haan wo aisa hi hai." },
+    { speaker: "Bisma", text: "Usko mat batana ki wo tere papa hain. Rehne de, waise hi theek hai." },
+    { speaker: "Zaeem", text: "Haan. Rehne dete hain." }
   ],
 
   monologue_millat: [
@@ -189,7 +206,6 @@ TME.DataCh4 = {
     { speaker: "Bisma", text: "Tu hamesha itna dheere chalta hai?" },
     { speaker: "Zaeem", text: "Haan. Medical condition hai." },
     { speaker: "Bisma", text: "Jhoot." },
-    { speaker: "Zaeem", text: "Haan jhoot hai." },
     { speaker: "Bisma", text: "...ye wali building hai meri." },
     { speaker: "Zaeem", text: "Already?" },
     { speaker: "Bisma", text: "Bola tha na. Two minutes." },
@@ -210,9 +226,8 @@ TME.DataCh4 = {
   narration_end: [
     "Two or three minutes. That's how far she lived. He'd worked the route out in his head before either of them had stood up, and it was still only two or three minutes.",
     "He walked her home anyway. Slowly. Like a man trying to make a short street longer.",
-    "Outside Al Broaster King he'd had her name and nothing else at all.",
-    "Tonight he had Hedwig's Theme learnt at nine years old, and a small boy's opinion of cats, and the fact that Hamid — Hamid — was somebody's family friend.",
-    "He never did bring the painting. She never once asked about it.",
+    "Outside Al Broaster King, eight months ago, he'd had her name and nothing else at all.",
+    "Tonight he had Hedwig's Theme learnt at nine years old, and a small boy's opinion of cats, and a story about his father he'd never told anyone who mattered.",
     "He went home the long way, for no reason he'd have admitted to."
   ],
 

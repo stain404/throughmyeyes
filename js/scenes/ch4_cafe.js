@@ -64,6 +64,10 @@ TME.Ch4_Cafe = {
     this.state = "intro_narration";
     this.timer = 0;
     this.childHasPhone = false;
+    this.boyRoaming = false;
+    this.boyPresent = false;
+    this.boyPhase = null;
+    this.boyTimer = 0;
     this.doorOpen = 0;
     this._walkSaid = false;
 
@@ -122,46 +126,46 @@ TME.Ch4_Cafe = {
     else if (this.state === "interests_pre"){
       this.camTarget = { zoom: 1, fx: this.W / 2, fy: this.H / 2 };
       this.timer += dt;
-      if (this.timer > 0.5){ this.state = "interests"; this._say(D.interests, "speech", "child_in"); }
-    }
-
-    // ---- the small boy ---------------------------------------------------
-    else if (this.state === "child_in"){
-      this.child.setAnimation("walk-left");
-      this.child.x -= WALK * dt;
-      if (this.child.x <= this.childSeat.x){
-        this.child.x = this.childSeat.x;
-        this.child.y = this.childSeat.y;
-        this.child.setAnimation("idle");
-        this.state = "child_talk";
-        this._say(D.child_arrives, "speech", "child_away");
+      if (this.timer > 0.5){
+        this.state = "interests";
+        this.boyRoaming = true;              // he starts his laps behind the talk
+        this.boyPresent = true;
+        this._say(D.interests, "speech", "phone_offer");
       }
     }
 
-    else if (this.state === "child_away"){
-      // trots back to his parents, then straight back again
-      if (this._moveToward(this.child, this.parentsX, 300, WALK, dt)){
-        this.timer += dt;
-        if (this.timer > 0.7) this.state = "child_back";
-      }
-    }
+    // The boy does his own thing on his own timer, underneath whatever
+    // conversation is happening, until Bisma calls him over.
+    if (this.boyRoaming) this._updateBoy(dt, WALK);
 
-    else if (this.state === "child_back"){
-      if (this._moveToward(this.child, this.childSeat.x, this.childSeat.y, WALK, dt)){
-        this.child.setAnimation("idle");
-        this.state = "phone";
-        this._say(D.child_returns, "speech", "cats", () => { this.childHasPhone = true; });
-      }
+    if (this.state === "phone_offer"){
+      // she says "aye" and he stops dead, which is the whole joke
+      this.boyRoaming = false;
+      this.child.x = this.childSeat.x;
+      this.child.y = this.childSeat.y;
+      this.child.setAnimation("idle");
+      this._say(D.boy_and_phone, "speech", "potter", () => { this.childHasPhone = true; });
+      this.state = "phone_playing";
     }
-
-    else if (this.state === "cats"){
-      this._say(D.cats_and_potter, "speech", "piano");
-      this.state = "cats_playing";
+    else if (this.state === "potter"){
+      this._say(D.potter, "speech", "piano");
+      this.state = "potter_playing";
     }
     else if (this.state === "piano"){
       this.camTarget = { zoom: 1.14, fx: 476, fy: 336 };
-      this._say(D.monologue_piano, "thought", "hamid");
+      this._say(D.monologue_piano, "thought", "history");
       this.state = "piano_playing";
+    }
+    else if (this.state === "history"){
+      this.camTarget = { zoom: 1, fx: this.W / 2, fy: this.H / 2 };
+      this._say(D.history, "speech", "building");
+      this.state = "history_playing";
+    }
+    else if (this.state === "building"){
+      // he points off down the street — nudge the camera that way
+      this.camTarget = { zoom: 1.06, fx: 300, fy: 330 };
+      this._say(D.my_building, "speech", "hamid");
+      this.state = "building_playing";
     }
     else if (this.state === "hamid"){
       this.camTarget = { zoom: 1, fx: this.W / 2, fy: this.H / 2 };
@@ -247,7 +251,8 @@ TME.Ch4_Cafe = {
       if (this.stage === "cafe"){
         this.bisma.setAnimation(s === C.BISMA ? "talk" : "idle");
         this.alfiya.setAnimation(s === C.ALFIYA ? "talk" : "idle");
-        this.child.setAnimation(s === C.CHILD ? "talk" : "idle");
+        // don't fight the boy's own walk loop while he's doing laps
+        if (!this.boyRoaming) this.child.setAnimation(s === C.CHILD ? "talk" : "idle");
       } else if (this.state !== "at_door"){
         this.bisma.setAnimation(s === C.BISMA ? "talk" : "idle");
       }
@@ -335,104 +340,181 @@ TME.Ch4_Cafe = {
   },
 
   _childVisible(){
-    const s = this.state;
-    return s === "child_in" || s === "child_talk" || s === "child_away" ||
-           s === "child_back" || s === "phone" || s === "cats" || s === "cats_playing" ||
-           s === "piano" || s === "piano_playing" || s === "hamid" || s === "hamid_playing" ||
-           s === "millat" || s === "millat_playing" || s === "leaving" ||
-           s === "leaving_playing" || s === "to_street";
+    return this.boyPresent;   // once he turns up, he's there for the evening
+  },
+
+  // His own little loop: table, hang about, back to his parents, repeat.
+  // Runs underneath the dialogue rather than interrupting it.
+  _updateBoy(dt, speed){
+    if (!this.boyPhase){ this.boyPhase = "to_table"; this.boyTimer = 0; }
+
+    if (this.boyPhase === "to_table"){
+      if (this._moveToward(this.child, this.childSeat.x, this.childSeat.y, speed, dt)){
+        this.child.setAnimation("idle");
+        this.boyPhase = "at_table"; this.boyTimer = 0;
+      }
+    } else if (this.boyPhase === "at_table"){
+      this.boyTimer += dt;
+      if (this.boyTimer > 2.4) this.boyPhase = "to_parents";
+    } else if (this.boyPhase === "to_parents"){
+      if (this._moveToward(this.child, this.parentsX, 296, speed, dt)){
+        this.child.setAnimation("idle");
+        this.boyPhase = "at_parents"; this.boyTimer = 0;
+      }
+    } else if (this.boyPhase === "at_parents"){
+      this.boyTimer += dt;
+      if (this.boyTimer > 1.7) this.boyPhase = "to_table";
+    }
   },
 
   // ========================================================================
   // #EDIT-BACKGROUND / SWAP REAL TILESET HERE — Love and Latte interior.
   // ========================================================================
+  // Outdoor seating: bamboo pergola, fairy lights, potted palms everywhere,
+  // and the lit glass front of the cafe behind. Night, a little past nine.
   _drawCafe(ctx){
     const W = this.W, H = this.H;
+    const S = TME.DataCh4.sign;
 
-    // walls: warm brick, panelled lower half
-    ctx.fillStyle = "#5a4436"; ctx.fillRect(0, 0, W, 330);
-    ctx.fillStyle = "#6b5140";
-    for (let y = 0; y < 214; y += 22){
-      for (let x = (y / 22) % 2 ? -26 : 0; x < W; x += 52) ctx.fillRect(x + 2, y + 2, 48, 18);
+    // night behind the whole thing
+    ctx.fillStyle = "#0d1016"; ctx.fillRect(0, 0, W, 330);
+
+    // the black signboard over the entrance
+    ctx.fillStyle = "#15161a"; ctx.fillRect(180, 16, 600, 60);
+    ctx.strokeStyle = "#3a3d46"; ctx.lineWidth = 3; ctx.strokeRect(180, 16, 600, 60);
+    ctx.save();
+    ctx.fillStyle = "#f2efe6";
+    ctx.font = "22px 'Nirmala UI', 'Mangal', 'Noto Sans Devanagari', sans-serif";
+    ctx.textAlign = "right";
+    ctx.fillText(S.hindi, 452, 54);
+    ctx.fillStyle = "#3f8a4a";                                   // the green roundel
+    ctx.beginPath(); ctx.arc(482, 46, 15, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#0f1116";
+    ctx.beginPath(); ctx.arc(482, 46, 9, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#f2efe6";
+    ctx.font = "15px 'Press Start 2P', monospace";
+    ctx.textAlign = "left";
+    ctx.fillText(S.english, 508, 52);
+    ctx.restore();
+
+    // shuttered shops flanking the cafe
+    ctx.fillStyle = "#20232c"; ctx.fillRect(0, 76, 180, 254); ctx.fillRect(780, 76, 180, 254);
+    ctx.fillStyle = "#191c24";
+    for (let y = 92; y < 300; y += 9){ ctx.fillRect(12, y, 152, 4); ctx.fillRect(796, y, 152, 4); }
+
+    // ---- the lit glass front, behind the seating ----
+    ctx.fillStyle = "#1a1a1e"; ctx.fillRect(180, 76, 600, 254);
+    ctx.fillStyle = "#d8cfa8"; ctx.fillRect(212, 118, 536, 190);      // bright interior
+    ctx.fillStyle = "#b9ad84"; ctx.fillRect(212, 118, 536, 20);       // ceiling shadow
+    // dark window mullions
+    ctx.fillStyle = "#15161a";
+    [212, 330, 448, 566, 684, 748].forEach(x => ctx.fillRect(x, 118, 9, 190));
+    ctx.fillRect(212, 118, 536, 8);
+
+    // framed art on the back wall, like the photo
+    const art = ["#c9563f", "#3f7ac9", "#c9a63f", "#4aa05f"];
+    art.forEach((c, i) => {
+      const x = 244 + i * 118;
+      ctx.fillStyle = "#2b2b30"; ctx.fillRect(x, 150, 42, 54);
+      ctx.fillStyle = c; ctx.fillRect(x + 5, 155, 32, 44);
+    });
+
+    // counter + someone behind it
+    ctx.fillStyle = "#5c5f4a"; ctx.fillRect(212, 250, 250, 58);
+    ctx.fillStyle = "#3a4d63"; ctx.fillRect(600, 224, 24, 54);
+    ctx.fillStyle = "#c99a72"; ctx.fillRect(604, 208, 16, 16);
+    ctx.fillStyle = "#241a16"; ctx.fillRect(603, 204, 18, 7);
+
+    // warm spill from the doorway onto the seating
+    ctx.save();
+    const spill = ctx.createRadialGradient(480, 320, 30, 480, 320, 340);
+    spill.addColorStop(0, "rgba(255,226,160,0.22)");
+    spill.addColorStop(1, "rgba(255,226,160,0)");
+    ctx.fillStyle = spill; ctx.fillRect(0, 150, W, 450);
+    ctx.restore();
+
+    // ---- ground: astroturf + tiled edge ----
+    ctx.fillStyle = "#2f4028"; ctx.fillRect(0, 330, W, H - 330);
+    ctx.fillStyle = "rgba(0,0,0,0.10)";
+    for (let x = 0; x < W; x += 7) ctx.fillRect(x, 330, 3, H - 330);
+    ctx.fillStyle = "#3b3a38"; ctx.fillRect(0, 540, W, H - 540);
+    ctx.fillStyle = "rgba(255,255,255,0.04)";
+    for (let x = 0; x < W; x += 44) ctx.fillRect(x, 540, 2, H - 540);
+
+    // ---- bamboo pergola overhead ----
+    ctx.fillStyle = "#8a6a3c";
+    ctx.fillRect(0, 84, W, 9);                                   // front beam
+    ctx.fillRect(0, 104, W, 6);
+    ctx.fillStyle = "#6d522d";
+    for (let x = 40; x < W; x += 96) ctx.fillRect(x, 84, 8, 26); // cross members
+    ctx.fillStyle = "#7a5c33";
+    ctx.fillRect(96, 84, 10, 246); ctx.fillRect(846, 84, 10, 246); // corner posts
+
+    // ---- fairy lights strung along the beam ----
+    const t = performance.now() / 1000;
+    ctx.strokeStyle = "rgba(30,24,16,0.8)"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 8){
+      const y = 100 + Math.sin((x / W) * Math.PI * 3) * 10;
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
-    ctx.fillStyle = "#4a3a2e"; ctx.fillRect(0, 214, W, 116);
-    ctx.fillStyle = "#3d3026";
-    for (let x = 0; x < W; x += 46) ctx.fillRect(x, 214, 3, 116);
-
-    // hanging pendant lights
-    for (let i = 0; i < 5; i++){
-      const x = 120 + i * 180;
-      ctx.fillStyle = "#2b211a"; ctx.fillRect(x - 1, 0, 2, 46);
-      ctx.fillStyle = "#3a2c22";
-      ctx.beginPath(); ctx.moveTo(x - 18, 68); ctx.lineTo(x + 18, 68); ctx.lineTo(x + 9, 46); ctx.lineTo(x - 9, 46);
-      ctx.closePath(); ctx.fill();
-      ctx.fillStyle = "#ffdc9a";
-      ctx.beginPath(); ctx.arc(x, 72, 5, 0, Math.PI * 2); ctx.fill();
-      ctx.globalAlpha = 0.10; ctx.fillStyle = "#ffdc9a";
-      ctx.beginPath(); ctx.arc(x, 76, 40, 0, Math.PI * 2); ctx.fill();
+    ctx.stroke();
+    for (let x = 16; x < W; x += 48){
+      const y = 100 + Math.sin((x / W) * Math.PI * 3) * 10 + 7;
+      const f = 0.75 + Math.sin(t * 2.2 + x * 0.4) * 0.2;
+      ctx.globalAlpha = f; ctx.fillStyle = "#ffd98f";
+      ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = f * 0.16;
+      ctx.beginPath(); ctx.arc(x, y, 15, 0, Math.PI * 2); ctx.fill();
       ctx.globalAlpha = 1;
     }
 
-    // chalkboard menu + the cafe name
-    ctx.fillStyle = "#1e2420"; ctx.fillRect(96, 86, 208, 108);
-    ctx.strokeStyle = "#8a6a45"; ctx.lineWidth = 5; ctx.strokeRect(96, 86, 208, 108);
-    ctx.save();
-    ctx.font = "11px 'Press Start 2P', monospace"; ctx.fillStyle = "#e9dfc6"; ctx.textAlign = "center";
-    ctx.fillText(TME.DataCh4.cafeName, 200, 116);
-    ctx.font = "7px 'Press Start 2P', monospace"; ctx.fillStyle = "#a9b8a0";
-    ctx.fillText("LATTE      120", 200, 142);
-    ctx.fillText("MOCHA      140", 200, 158);
-    ctx.fillText("SANDWICH   180", 200, 174);
-    ctx.restore();
+    // the boy's parents, at a table further back
+    ctx.fillStyle = "#5a4468"; ctx.fillRect(this.parentsX - 18, 264, 24, 34);
+    ctx.fillStyle = "#b98963"; ctx.fillRect(this.parentsX - 14, 248, 16, 16);
+    ctx.fillStyle = "#3e5068"; ctx.fillRect(this.parentsX + 24, 264, 24, 34);
+    ctx.fillStyle = "#b98963"; ctx.fillRect(this.parentsX + 28, 248, 16, 16);
+    ctx.fillStyle = "#17181c";
+    ctx.beginPath(); ctx.ellipse(this.parentsX + 15, 308, 42, 11, 0, 0, Math.PI * 2); ctx.fill();
 
-    // counter with a coffee machine and a barista
-    ctx.fillStyle = "#7a5a3c"; ctx.fillRect(640, 214, 320, 26);
-    ctx.fillStyle = "#5f452e"; ctx.fillRect(640, 240, 320, 90);
-    ctx.fillStyle = "#c9c3b8"; ctx.fillRect(700, 168, 54, 46);
-    ctx.fillStyle = "#8f8a80"; ctx.fillRect(708, 180, 38, 8);
-    ctx.fillStyle = "#3a4d63"; ctx.fillRect(860, 158, 26, 58);   // barista
-    ctx.fillStyle = "#c99a72"; ctx.fillRect(864, 142, 18, 18);
-    ctx.fillStyle = "#241a16"; ctx.fillRect(863, 138, 20, 8);
-
-    // shelf of jars
-    ctx.fillStyle = "#4a3a2e"; ctx.fillRect(340, 120, 240, 8);
-    const jars = ["#c98a5c", "#8fae6a", "#c9a86b", "#a07a5c", "#7f8fae"];
-    for (let i = 0; i < 6; i++){
-      ctx.fillStyle = jars[i % jars.length];
-      ctx.fillRect(352 + i * 38, 96, 22, 24);
-    }
-
-    // plant in the corner
-    ctx.fillStyle = "#8a5a3c"; ctx.fillRect(28, 262, 44, 46);
-    ctx.fillStyle = "#4d7a3a";
-    for (let i = 0; i < 5; i++){
-      ctx.beginPath();
-      ctx.ellipse(50 + (i - 2) * 13, 244 - Math.abs(i - 2) * 9, 11, 20, (i - 2) * 0.4, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // floor
-    ctx.fillStyle = "#6b5946"; ctx.fillRect(0, 330, W, H - 330);
-    ctx.fillStyle = "rgba(0,0,0,0.13)";
-    for (let x = -40; x < W; x += 64) ctx.fillRect(x, 330, 4, H - 330);
-    for (let y = 330; y < H; y += 30) ctx.fillRect(0, y, W, 2);
-
-    // the boy's parents, at a table in the background
-    ctx.fillStyle = "#6a4f7a"; ctx.fillRect(this.parentsX - 18, 268, 24, 34);
-    ctx.fillStyle = "#c99a72"; ctx.fillRect(this.parentsX - 14, 252, 16, 16);
-    ctx.fillStyle = "#4a5f7a"; ctx.fillRect(this.parentsX + 24, 268, 24, 34);
-    ctx.fillStyle = "#c99a72"; ctx.fillRect(this.parentsX + 28, 252, 16, 16);
-    ctx.fillStyle = "#4a3a2e";
-    ctx.beginPath(); ctx.ellipse(this.parentsX + 15, 312, 44, 11, 0, 0, Math.PI * 2); ctx.fill();
+    // ---- potted palms, the defining feature of the place ----
+    this._drawPalm(ctx, 60, 384, 1.15);
+    this._drawPalm(ctx, 250, 356, 0.8);
+    this._drawPalm(ctx, 700, 360, 0.9);
+    this._drawPalm(ctx, 900, 392, 1.2);
   },
 
-  // SWAP REAL SPRITES HERE — cafe table with two cups on it.
+  // SWAP REAL SPRITES HERE — potted palm.
+  _drawPalm(ctx, x, groundY, scale){
+    ctx.save();
+    ctx.translate(x, groundY);
+    ctx.scale(scale, scale);
+
+    ctx.fillStyle = "#1e2028"; ctx.fillRect(-19, 0, 38, 34);      // black pot
+    ctx.fillStyle = "#2b2e38"; ctx.fillRect(-19, 0, 38, 7);
+    ctx.fillStyle = "#4a5f2e"; ctx.fillRect(-3, -34, 6, 34);      // stem
+
+    const fronds = [-1.15, -0.72, -0.3, 0.3, 0.72, 1.15];
+    fronds.forEach((a, i) => {
+      ctx.save();
+      ctx.translate(0, -34);
+      ctx.rotate(a);
+      ctx.fillStyle = i % 2 ? "#4f7a34" : "#3f6529";
+      ctx.beginPath();
+      ctx.ellipse(0, -26, 7, 28, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+    ctx.restore();
+  },
+
+  // SWAP REAL SPRITES HERE — black round table with two cups on it.
   _drawTable(ctx, t){
-    ctx.fillStyle = "#3a2f26";
+    ctx.fillStyle = "#0e0f13";
     ctx.beginPath(); ctx.ellipse(t.cx, t.cy + 4, t.rx, t.ry, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#6b5340";
+    ctx.fillStyle = "#212430";
     ctx.beginPath(); ctx.ellipse(t.cx, t.cy, t.rx, t.ry, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#7d6349";
+    ctx.fillStyle = "#2c3040";
     ctx.beginPath(); ctx.ellipse(t.cx, t.cy - 2, t.rx - 8, t.ry - 5, 0, 0, Math.PI * 2); ctx.fill();
 
     ctx.fillStyle = "#efe9dd"; ctx.fillRect(t.cx - 34, t.cy - 12, 15, 12);   // her cup
@@ -441,7 +523,7 @@ TME.Ch4_Cafe = {
     ctx.fillRect(t.cx - 32, t.cy - 10, 11, 4);
     ctx.fillRect(t.cx + 22, t.cy - 10, 11, 4);
 
-    ctx.fillStyle = "#2f2620";
+    ctx.fillStyle = "#15171f";
     ctx.fillRect(t.cx - 4, t.cy + 8, 8, 32);
     ctx.fillRect(t.cx - 20, t.cy + 36, 40, 5);
   },

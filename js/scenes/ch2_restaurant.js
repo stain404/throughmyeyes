@@ -318,12 +318,13 @@ TME.Ch2_Restaurant = {
   _drawSign(ctx){
     const S = TME.DataCh2.sign;
 
-    // neighbouring shop boards either side, cropped by the frame
-    ctx.fillStyle = "#3f5a7a"; ctx.fillRect(0, 0, 92, 150);
-    ctx.fillStyle = "#2d4159";
+    // neighbouring shop boards either side, cropped by the frame. Lit boards
+    // at night, so they stay readable while everything around them is dark.
+    ctx.fillStyle = "#22364d"; ctx.fillRect(0, 0, 92, 150);
+    ctx.fillStyle = "#31506e";
     for (let y = 12; y < 140; y += 26) ctx.fillRect(8, y, 76, 18);
-    ctx.fillStyle = "#c8761f"; ctx.fillRect(876, 0, 84, 150);
-    ctx.fillStyle = "#e0a040"; ctx.fillRect(884, 16, 68, 110);
+    ctx.fillStyle = "#7a4711"; ctx.fillRect(876, 0, 84, 150);
+    ctx.fillStyle = "#b57c28"; ctx.fillRect(884, 16, 68, 110);
 
     // the black board
     ctx.fillStyle = "#141519";
@@ -373,88 +374,114 @@ TME.Ch2_Restaurant = {
   },
 
   _drawAwning(ctx){
-    // corrugated sheet
+    // corrugated sheet, only lit from below by the shop's tube lights
     for (let x = 92; x < 876; x += 10){
-      ctx.fillStyle = ((x / 10) | 0) % 2 ? "#b3ab99" : "#9c9384";
+      ctx.fillStyle = ((x / 10) | 0) % 2 ? "#4e4a41" : "#413d36";
       ctx.fillRect(x, 146, 10, 32);
     }
-    ctx.fillStyle = "#6f6857"; ctx.fillRect(92, 146, 784, 5);
-    // the bright green-yellow beam under it
-    ctx.fillStyle = "#b9c94a"; ctx.fillRect(92, 178, 784, 10);
-    ctx.fillStyle = "#8fa032"; ctx.fillRect(92, 186, 784, 4);
+    ctx.fillStyle = "#2d2a24"; ctx.fillRect(92, 146, 784, 5);
+    // the green-yellow beam under it
+    ctx.fillStyle = "#6d7a2c"; ctx.fillRect(92, 178, 784, 10);
+    ctx.fillStyle = "#4d5720"; ctx.fillRect(92, 186, 784, 4);
+
+    // tube lights along the underside — the reason anything out here is
+    // visible at all at this hour
+    for (let i = 0; i < 3; i++){
+      const x = 180 + i * 260;
+      ctx.fillStyle = "#fff6d8"; ctx.fillRect(x, 190, 180, 5);
+      ctx.save();
+      ctx.globalAlpha = 0.13; ctx.fillStyle = "#ffe9a8";
+      ctx.beginPath(); ctx.ellipse(x + 90, 208, 150, 46, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
     // support posts down to the pavement
-    ctx.fillStyle = "#4a443a";
+    ctx.fillStyle = "#26231e";
     ctx.fillRect(294, 188, 8, 142);
     ctx.fillRect(592, 188, 8, 142);
   },
 
   _drawShopfront(ctx){
-    // weathered concrete face
-    ctx.fillStyle = "#a2947f"; ctx.fillRect(0, 188, 960, 142);
-    ctx.fillStyle = "rgba(0,0,0,0.10)";
+    // weathered concrete face, in shadow at this hour
+    ctx.fillStyle = "#4c453b"; ctx.fillRect(0, 188, 960, 142);
+    ctx.fillStyle = "rgba(0,0,0,0.16)";
     for (let y = 188; y < 330; y += 22) ctx.fillRect(0, y, 960, 2);
 
-    // ---- the open shop, dark inside ----
-    ctx.fillStyle = "#171310"; ctx.fillRect(296, 196, 300, 134);
+    // ---- the open shop: lit up, and the only real light source here ----
+    ctx.fillStyle = "#6d5734"; ctx.fillRect(296, 196, 300, 134);
+    ctx.fillStyle = "#8a6d3d"; ctx.fillRect(302, 196, 288, 44);   // strip-lit back wall
+    ctx.fillStyle = "#fff4d0"; ctx.fillRect(320, 202, 250, 5);    // the tube inside
 
-    // guy standing in the doorway
+    // guy standing in the doorway, backlit
     ctx.fillStyle = "#7a2f28"; ctx.fillRect(408, 232, 26, 42);
-    ctx.fillStyle = "#3b2a21"; ctx.fillRect(408, 274, 26, 48);
-    ctx.fillStyle = "#c99a72"; ctx.fillRect(414, 218, 15, 16);
+    ctx.fillStyle = "#2e211a"; ctx.fillRect(408, 274, 26, 48);
+    ctx.fillStyle = "#b98963"; ctx.fillRect(414, 218, 15, 16);
 
-    // glass display / drinks fridge
-    ctx.fillStyle = "#232a30"; ctx.fillRect(516, 214, 72, 116);
-    ctx.fillStyle = "#3d4c58";
+    // glass display / drinks fridge, lit from within
+    ctx.fillStyle = "#2c3740"; ctx.fillRect(516, 214, 72, 116);
+    ctx.fillStyle = "#6f8ea3";
     for (let y = 222; y < 322; y += 22) ctx.fillRect(520, y, 64, 3);
 
     // ice cream freezer, white with a red band
-    ctx.fillStyle = "#ddd8cf"; ctx.fillRect(302, 250, 92, 80);
-    ctx.fillStyle = "#b8342c"; ctx.fillRect(302, 262, 92, 20);
-    ctx.fillStyle = "#efeae1"; ctx.fillRect(306, 288, 84, 38);
+    ctx.fillStyle = "#cec8bd"; ctx.fillRect(302, 250, 92, 80);
+    ctx.fillStyle = "#a52d26"; ctx.fillRect(302, 262, 92, 20);
+    ctx.fillStyle = "#ded8cd"; ctx.fillRect(306, 288, 84, 38);
 
     // ---- left pillar: the laundry board and the man sat under it ----
-    ctx.fillStyle = "#8d8271"; ctx.fillRect(92, 188, 204, 142);
-    ctx.fillStyle = "#efece2"; ctx.fillRect(100, 208, 74, 92);
-    ctx.strokeStyle = "#7a6a52"; ctx.lineWidth = 2;
+    ctx.fillStyle = "#42392f"; ctx.fillRect(92, 188, 204, 142);
+    ctx.fillStyle = "#b3ada0"; ctx.fillRect(100, 208, 74, 92);
+    ctx.strokeStyle = "#4a4034"; ctx.lineWidth = 2;
     ctx.strokeRect(100, 208, 74, 92);
-    ctx.fillStyle = "#b45a86"; ctx.fillRect(104, 212, 66, 12);
-    ctx.fillStyle = "#9aa2b8";
+    ctx.fillStyle = "#8a4467"; ctx.fillRect(104, 212, 66, 12);
+    ctx.fillStyle = "#6e7488";
     for (let r = 0; r < 4; r++)
       for (let c = 0; c < 3; c++) ctx.fillRect(106 + c * 22, 230 + r * 17, 18, 13);
 
-    ctx.fillStyle = "#2f3d5c"; ctx.fillRect(104, 286, 30, 34);   // seated man
-    ctx.fillStyle = "#c99a72"; ctx.fillRect(111, 270, 16, 17);
-    ctx.fillStyle = "#241a16"; ctx.fillRect(110, 266, 18, 8);
+    ctx.fillStyle = "#26304a"; ctx.fillRect(104, 286, 30, 34);   // seated man
+    ctx.fillStyle = "#9c7657"; ctx.fillRect(111, 270, 16, 17);
+    ctx.fillStyle = "#1c1410"; ctx.fillRect(110, 266, 18, 8);
 
     // ---- right side: general store, poles, bucket, concrete block ----
-    ctx.fillStyle = "#6f6252"; ctx.fillRect(600, 188, 360, 142);
-    const packs = ["#d94f3d", "#e8c14a", "#4a8fd9", "#5fb04f", "#d97fb0"];
+    ctx.fillStyle = "#3b342c"; ctx.fillRect(600, 188, 360, 142);
+    // its own strip light, so the hanging packets still read
+    ctx.fillStyle = "#fff4d0"; ctx.fillRect(676, 192, 200, 4);
+    const packs = ["#a83b2e", "#b8993a", "#3a6fa8", "#4a8a3e", "#a8628a"];
     for (let c = 0; c < 7; c++){
       for (let r = 0; r < 5; r++){
         ctx.fillStyle = packs[(c + r) % packs.length];
-        ctx.fillRect(690 + c * 24, 196 + r * 17, 18, 13);
+        ctx.fillRect(690 + c * 24, 200 + r * 17, 18, 13);
       }
     }
-    ctx.fillStyle = "#c0392b"; ctx.fillRect(736, 196, 6, 124); ctx.fillRect(756, 196, 6, 124);
-    ctx.fillStyle = "#2f6fd0"; ctx.fillRect(782, 282, 58, 44);   // blue bucket
-    ctx.fillStyle = "#4a8ae8"; ctx.fillRect(782, 282, 58, 8);
-    ctx.fillStyle = "#8d8271"; ctx.fillRect(866, 296, 78, 60);   // concrete block
-    ctx.fillStyle = "#736858"; ctx.fillRect(866, 296, 78, 8);
+    ctx.fillStyle = "#8f2c21"; ctx.fillRect(736, 200, 6, 120); ctx.fillRect(756, 200, 6, 120);
+    ctx.fillStyle = "#25539c"; ctx.fillRect(782, 282, 58, 44);   // blue bucket
+    ctx.fillStyle = "#3769b0"; ctx.fillRect(782, 282, 58, 8);
+    ctx.fillStyle = "#453c32"; ctx.fillRect(866, 296, 78, 60);   // concrete block
+    ctx.fillStyle = "#372f27"; ctx.fillRect(866, 296, 78, 8);
   },
 
   _drawPavement(ctx){
     const H = this.H;
-    // astroturf
-    ctx.fillStyle = "#66763f"; ctx.fillRect(0, 330, 960, 200);
-    ctx.fillStyle = "rgba(0,0,0,0.08)";
+    // astroturf, dark except where the shop light reaches it
+    ctx.fillStyle = "#33401f"; ctx.fillRect(0, 330, 960, 200);
+    ctx.fillStyle = "rgba(0,0,0,0.10)";
     for (let x = 0; x < 960; x += 7) ctx.fillRect(x, 330, 3, 200);
-    ctx.fillStyle = "rgba(255,255,255,0.04)";
+
+    // pool of warm light spilling out of the open shop
+    ctx.save();
+    const spill = ctx.createRadialGradient(446, 330, 20, 446, 330, 330);
+    spill.addColorStop(0, "rgba(255,226,160,0.30)");
+    spill.addColorStop(1, "rgba(255,226,160,0)");
+    ctx.fillStyle = spill;
+    ctx.fillRect(0, 330, 960, 200);
+    ctx.restore();
+
+    ctx.fillStyle = "rgba(255,255,255,0.03)";
     for (let y = 336; y < 530; y += 12) ctx.fillRect(0, y, 960, 2);
 
     // kerb, then the road itself — she has her back to this
-    ctx.fillStyle = "#9c9384"; ctx.fillRect(0, 530, 960, 14);
-    ctx.fillStyle = "#3f3d3a"; ctx.fillRect(0, 544, 960, H - 544);
-    ctx.fillStyle = "rgba(255,255,255,0.05)";
+    ctx.fillStyle = "#4a463d"; ctx.fillRect(0, 530, 960, 14);
+    ctx.fillStyle = "#1c1b1a"; ctx.fillRect(0, 544, 960, H - 544);
+    ctx.fillStyle = "rgba(255,240,200,0.07)";
     for (let x = 20; x < 960; x += 90) ctx.fillRect(x, 572, 46, 4);
   },
 
