@@ -288,7 +288,7 @@ TME.Ch4_Cafe = {
       TME.EndCard.show({
         title: D.chapterEndTitle,
         subtitle: D.chapterEndSubtitle,
-        onDone: () => TME.goToChapter("Ch5")
+        onDone: () => TME.goToChapter("Ch5_Flowers")
       });
     }
   },

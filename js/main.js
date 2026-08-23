@@ -72,8 +72,9 @@ window.TME = window.TME || {};
   TME.SceneManager.register("Ch2_Restaurant", TME.Ch2_Restaurant);
   TME.SceneManager.register("Ch3_GroupChat",  TME.Ch3_GroupChat);
   TME.SceneManager.register("Ch4_Cafe",       TME.Ch4_Cafe);
-  // #NEXT-CHAPTER: register Ch5 here once it exists —
-  //   TME.SceneManager.register("Ch5", TME.Ch5);
+  TME.SceneManager.register("Ch5_Flowers",    TME.Ch5_Flowers);
+  // #NEXT-CHAPTER: register Ch6 here once it exists —
+  //   TME.SceneManager.register("Ch6", TME.Ch6);
   // Chapter 4's end card already hands off to it via TME.goToChapter().
 
   // Open on the chapter menu rather than dropping straight into Chapter 1.
@@ -95,6 +96,7 @@ window.TME = window.TME || {};
   };
 
   // ---- global input router ----
+  const MOVE_KEYS = ["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright"];
   // Priority: chapter select > end card > dialogue box > phone UI > scene.
   // Dialogue (including an internal monologue shown over the phone
   // profile view, e.g. Scene B) must always be able to receive [E] to
@@ -112,7 +114,14 @@ window.TME = window.TME || {};
     }
 
     if (TME.EndCard.active){ TME.EndCard.handleKey(e); return; }
-    if (TME.dialogueBox.active){ TME.dialogueBox.handleKey(e); return; }
+    if (TME.dialogueBox.active){
+      TME.dialogueBox.handleKey(e);
+      // Walk-and-talk: movement keys still reach the scene while a line is
+      // on screen, so Chapter 5's "hold [W] to ride" keeps working while
+      // Ayaan is talking. Scenes that don't want this simply ignore them.
+      if (MOVE_KEYS.indexOf(e.key.toLowerCase()) !== -1) TME.SceneManager.handleKey(e);
+      return;
+    }
     if (TME.PhoneUI.isAnyOpen()){ TME.PhoneUI.handleKey(e); return; }
     TME.SceneManager.handleKey(e);
   });

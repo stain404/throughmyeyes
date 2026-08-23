@@ -39,5 +39,12 @@ TME.CHAPTERS = [
     title: "Two Or Three Minutes",
     blurb: "Love and Latte, just past nine. And the walk home afterwards.",
     fromBlack: true
+  },
+  {
+    num: "5",
+    scene: "Ch5_Flowers",
+    title: "Four Flowers",
+    blurb: "A flower stall, two bikes, and four choices nobody ever asked him to explain.",
+    fromBlack: true
   }
 ];
