@@ -77,7 +77,7 @@ TME.DataCh3 = {
 
     // ---- beat 4: being ignored ---------------------------------------
     { type: "chat", from: "Bisma",  text: "alisha did you finish yours?" },
-    { type: "chat", from: "Alisha", text: "almost!! kal bhejti hoon" },
+    { type: "chat", from: "Alisha", text: "almost!! i'll send it tomorrow" },
     { type: "chat", from: "Bisma",  text: "arhaan send the bike one again, properly this time" },
     { type: "chat", from: "Zaeem",  text: "bisma" },
     { type: "narration", text: "Nothing. Not angry — gone. The group kept moving and he was the only thing in it that had stopped." },
@@ -114,21 +114,21 @@ TME.DataCh3 = {
     // ---- beat 7: Alisha, immediately, with zero shame ----------------
     { type: "chat", from: "Alisha", text: "OMG" },
     { type: "chat", from: "Alisha", text: "i ship. i ship bisma zaeem. i'm saying it, i'm the one saying it" },
-    { type: "chat", from: "Alisha", text: "zaeem dekho, maan gayi!!" },
-    { type: "chat", from: "Alisha", text: "bisma mera bhai bohot accha hai seriously, main jhoot nahi bol rahi" },
-    { type: "chat", from: "Alisha", text: "zaeem abhi rulana mat usko" },
+    { type: "chat", from: "Alisha", text: "zaeem look, she forgave you!!" },
+    { type: "chat", from: "Alisha", text: "bisma my bhai is genuinely a good guy, i'm not just saying it because he's here" },
+    { type: "chat", from: "Alisha", text: "zaeem don't you dare make her cry now" },
     { type: "chat", from: "Zaeem",  text: "alisha." },
     { type: "chat", from: "Alisha", text: "WHAT" },
     { type: "chat", from: "Arhaan", text: "she's not wrong though" },
     { type: "chat", from: "Aarti",  text: "she's never wrong. that's the whole problem with her" },
 
     // ---- beat 8: goodnight -------------------------------------------
-    { type: "chat", from: "Bisma",  text: "achha main sone jaa rahi hoon" },
+    { type: "chat", from: "Bisma",  text: "okay i'm going to sleep" },
     { type: "chat", from: "Bisma",  text: "goooddnightttt zaeeem" },
     { type: "chat", from: "Zaeem",  text: "goodnight bisma" },
-    { type: "chat", from: "Bisma",  text: "aur haan" },
-    { type: "chat", from: "Bisma",  text: "next time bolne se pehle thoda soch lena" },
-    { type: "chat", from: "Zaeem",  text: "kabhi nahi" },
+    { type: "chat", from: "Bisma",  text: "and hey" },
+    { type: "chat", from: "Bisma",  text: "next time think a little before you speak" },
+    { type: "chat", from: "Zaeem",  text: "never" },
     { type: "chat", from: "Alisha", text: "I SHIP" }
   ],
 

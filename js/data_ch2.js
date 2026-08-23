@@ -124,10 +124,10 @@ TME.DataCh2 = {
   // #EDIT-DIALOGUE — beat 1: killing time with the cousin at the left table.
   // --------------------------------------------------------------------
   banter: [
-    { speaker: "Cousin", text: "Bola tha na andar baithte hain. Yahan machchar kaat rahe hain." },
-    { speaker: "Zaeem",  text: "Andar fan nahi chalta. Yahan hawa toh aati hai." },
-    { speaker: "Cousin", text: "Hawa. Ye Oshiwara hai bhai. Yahan hawa nahi, traffic hai." },
-    { speaker: "Zaeem",  text: "Same cheez hai." }
+    { speaker: "Cousin", text: "I told you we should have sat inside. The mosquitoes are eating me alive." },
+    { speaker: "Zaeem",  text: "The fan doesn't work inside. At least there's air out here." },
+    { speaker: "Cousin", text: "Air. This is Oshiwara, bhai. There's no air here, there's traffic." },
+    { speaker: "Zaeem",  text: "Same thing." }
   ],
 
   // --------------------------------------------------------------------
@@ -135,9 +135,9 @@ TME.DataCh2 = {
   // back to the road; he can't even see her face yet.
   // --------------------------------------------------------------------
   monologue_notice: [
-    { speaker: "Zaeem (thinking)", text: "...kaun hai wo?" },
+    { speaker: "Zaeem (thinking)", text: "...who is that?" },
     { speaker: "Zaeem (thinking)", text: "Back to the road. Doesn't even know anyone's looking." },
-    { speaker: "Zaeem (thinking)", text: "Face bhi nahi dikh raha aur phir bhi main dekh raha hoon. Great. Very normal." }
+    { speaker: "Zaeem (thinking)", text: "I can't even see her face and I'm still looking. Great. Very normal." }
   ],
 
   // --------------------------------------------------------------------
@@ -145,13 +145,13 @@ TME.DataCh2 = {
   // table first, because of course he does.
   // --------------------------------------------------------------------
   hamza_greeting: [
-    { speaker: "Hamza",  text: "Arre! Assalamualaikum bhai!" },
-    { speaker: "Zaeem",  text: "Walaikum assalam! Hamza, tu yahan kaise?" },
-    { speaker: "Hamza",  text: "Bas unse milne aaya tha. Tu suna, kya haal hai?" },
-    { speaker: "Zaeem",  text: "Badhiya hai yaar. Tu bata?" },
-    { speaker: "Hamza",  text: "Sab set hai. Achha main chalta hoon, wo log wait kar rahe hain." },
-    { speaker: "Zaeem",  text: "Haan haan, jaa jaa." },
-    { speaker: "Cousin", text: "Tera broast thanda ho raha hai." }
+    { speaker: "Hamza",  text: "Assalamualaikum, bhai!" },
+    { speaker: "Zaeem",  text: "Walaikum assalam! Hamza, what are you doing here?" },
+    { speaker: "Hamza",  text: "Just came to see them. How have you been?" },
+    { speaker: "Zaeem",  text: "Good, man. You?" },
+    { speaker: "Hamza",  text: "All good. Listen, I'll catch you later, they're waiting for me." },
+    { speaker: "Zaeem",  text: "Yeah, yeah. Go." },
+    { speaker: "Cousin", text: "Your broast is going cold." }
   ],
 
   // --------------------------------------------------------------------
@@ -170,16 +170,16 @@ TME.DataCh2 = {
   // --------------------------------------------------------------------
   cousin_catches: [
     { speaker: "Cousin", text: "Bhai." },
-    { speaker: "Cousin", text: "Bhai. Tu dekh kya raha hai?" },
-    { speaker: "Zaeem",  text: "Kuch nahi." },
-    { speaker: "Cousin", text: "Kuch nahi ka matlab hamesha kuch hota hai." },
-    { speaker: "Zaeem",  text: "Kha na tu. Chup chaap." }
+    { speaker: "Cousin", text: "Bhai. What are you staring at?" },
+    { speaker: "Zaeem",  text: "Nothing." },
+    { speaker: "Cousin", text: "'Nothing' always means something." },
+    { speaker: "Zaeem",  text: "Just eat. Quietly." }
   ],
 
   monologue_watching: [
     { speaker: "Zaeem (thinking)", text: "She's laughing at something Hamza said." },
-    { speaker: "Zaeem (thinking)", text: "Main yahan baitha hoon, wo wahan baithi hai. Bas itna hi hai." },
-    { speaker: "Zaeem (thinking)", text: "...aur main phir bhi dekh raha hoon." }
+    { speaker: "Zaeem (thinking)", text: "I'm sitting here. She's sitting there. That's the whole thing." },
+    { speaker: "Zaeem (thinking)", text: "...and I'm still looking." }
   ],
 
   // --------------------------------------------------------------------
@@ -189,10 +189,10 @@ TME.DataCh2 = {
   // --------------------------------------------------------------------
   monologue_romantic: [
     { speaker: "Zaeem (thinking)", text: "The shop light is falling straight onto her table. Of course it is." },
-    { speaker: "Zaeem (thinking)", text: "Wo apne baalon ko kaan ke peeche kar rahi hai aur mujhe laga main saans lena bhool gaya." },
-    { speaker: "Zaeem (thinking)", text: "Main ghar jaake ye bhool nahi paunga. Pata hai mujhe." },
-    { speaker: "Zaeem (thinking)", text: "Kisi din shayad puchh lunga uska naam." },
-    { speaker: "Zaeem (thinking)", text: "...nahi puchhunga. Main aisa hi hoon." }
+    { speaker: "Zaeem (thinking)", text: "She just tucked her hair behind her ear and I forgot how breathing works." },
+    { speaker: "Zaeem (thinking)", text: "I'm going to go home and not be able to forget this. I already know it." },
+    { speaker: "Zaeem (thinking)", text: "Maybe one day I'll ask her name." },
+    { speaker: "Zaeem (thinking)", text: "...I won't. That's just how I am." }
   ],
 
   // --------------------------------------------------------------------

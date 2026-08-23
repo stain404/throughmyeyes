@@ -79,13 +79,13 @@ TME.DataCh4 = {
   // --------------------------------------------------------------------
   alfiya_table: [
     { speaker: "Bisma",  text: "Zaeem — this is Alfiya." },
-    { speaker: "Alfiya", text: "Hi! Maine bohot suna hai tumhare baare mein." },
+    { speaker: "Alfiya", text: "Hi! I've heard a lot about you." },
     { speaker: "Zaeem",  text: "Good things?" },
     { speaker: "Alfiya", text: "I said what I said." },
     { speaker: "Bisma",  text: "She's not going to tell you. Don't try." },
-    { speaker: "Alfiya", text: "Ye sandwich actually acha hai. Bisma tu kyun nahi le rahi?" },
-    { speaker: "Bisma",  text: "Main coffee pe hoon." },
-    { speaker: "Alfiya", text: "Achha main nikalti hoon, mummy ka call aa gaya. Bye Bisma. Bye Zaeem!" },
+    { speaker: "Alfiya", text: "This sandwich is actually good. Bisma, why aren't you getting one?" },
+    { speaker: "Bisma",  text: "I'm on coffee." },
+    { speaker: "Alfiya", text: "Okay, I'm heading off, my mum's calling. Bye Bisma. Bye Zaeem!" },
     { speaker: "Zaeem",  text: "Bye—" }
   ],
 
@@ -94,8 +94,8 @@ TME.DataCh4 = {
   // --------------------------------------------------------------------
   monologue_alone: [
     { speaker: "Zaeem (thinking)", text: "...and then it was just us." },
-    { speaker: "Zaeem (thinking)", text: "Ye wahi ladki hai jo group mein roz mujhe maarne ki dhamki deti hai." },
-    { speaker: "Zaeem (thinking)", text: "Aur abhi wo apne cup ka handle ghuma rahi hai aur mujhse aankh nahi milaa rahi." },
+    { speaker: "Zaeem (thinking)", text: "This is the same girl who threatens to beat me up in the group chat every day." },
+    { speaker: "Zaeem (thinking)", text: "And right now she's turning her cup handle round and round and not looking at me." },
     { speaker: "Zaeem (thinking)", text: "wow. she's so beautiful." },
     { speaker: "Zaeem (thinking)", text: "Don't say that out loud. Do NOT say that out loud." }
   ],
@@ -105,13 +105,13 @@ TME.DataCh4 = {
   // already doing laps between his parents' table and theirs while this runs.
   // --------------------------------------------------------------------
   interests: [
-    { speaker: "Bisma", text: "Okay so what do you actually do. Jab tu online annoying nahi ho raha hota." },
+    { speaker: "Bisma", text: "Okay, so what do you actually do? When you're not being annoying online." },
     { speaker: "Zaeem", text: "That IS the hobby." },
     { speaker: "Bisma", text: "Seriously." },
-    { speaker: "Zaeem", text: "I draw. Badly. Bohot music sunta hoon. Tu bata?" },
-    { speaker: "Bisma", text: "Painting. Aur padhna — main bohot ajeeb cheezein padhti hoon." },
-    { speaker: "Zaeem", text: "Define ajeeb." },
-    { speaker: "Bisma", text: "Not yet. Pehle thoda trust build karte hain." }
+    { speaker: "Zaeem", text: "I draw. Badly. I listen to a lot of music. You?" },
+    { speaker: "Bisma", text: "Painting. And reading. I read really strange things." },
+    { speaker: "Zaeem", text: "Define strange." },
+    { speaker: "Bisma", text: "Not yet. Let's build some trust first." }
   ],
 
   // --------------------------------------------------------------------
@@ -119,96 +119,96 @@ TME.DataCh4 = {
   // her phone unprompted.
   // --------------------------------------------------------------------
   boy_and_phone: [
-    { speaker: "Bisma",     text: "Ye bachcha teesri baar aa chuka hai." },
-    { speaker: "Zaeem",     text: "Uske parents wahan baithe hain. Usko humari table zyada interesting lag rahi hai." },
-    { speaker: "Bisma",     text: "Aye. Tujhe billiyan pasand hain?" },
-    { speaker: "Small boy", text: "HAAN" },
-    { speaker: "Bisma",     text: "Le. Baith yahan." },
-    { speaker: "Small boy", text: "aur laga do" }
+    { speaker: "Bisma",     text: "That's the third time this kid has come over." },
+    { speaker: "Zaeem",     text: "His parents are sitting right there. He's decided our table is more interesting." },
+    { speaker: "Bisma",     text: "Hey. Do you like cats?" },
+    { speaker: "Small boy", text: "YES" },
+    { speaker: "Bisma",     text: "Here. Sit." },
+    { speaker: "Small boy", text: "more please" }
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 5: Harry Potter, and the piano.
   // --------------------------------------------------------------------
   potter: [
-    { speaker: "Bisma", text: "Ye sound sun. Ye Harry Potter wala hai na?" },
+    { speaker: "Bisma", text: "Listen to that sound. That's the Harry Potter one, isn't it?" },
     { speaker: "Zaeem", text: "Wait. Are you a Potter person?" },
-    { speaker: "Bisma", text: "Obviously. Ravenclaw. Argument nahi karna." },
+    { speaker: "Bisma", text: "Obviously. Ravenclaw. Don't argue." },
     { speaker: "Zaeem", text: "I wasn't going to." },
-    { speaker: "Bisma", text: "Main chhoti thi na, maine piano pe theme seekha tha. Hedwig's Theme." },
+    { speaker: "Bisma", text: "When I was little I learnt the theme on piano. Hedwig's Theme." },
     { speaker: "Zaeem", text: "You did NOT." },
-    { speaker: "Bisma", text: "Abhi bhi bajaa sakti hoon. Shayad. Thoda sa." }
+    { speaker: "Bisma", text: "I can still play it. Probably. A little." }
   ],
 
   monologue_piano: [
     { speaker: "Zaeem (thinking)", text: "She learnt Hedwig's Theme at nine and said it like it was nothing." },
-    { speaker: "Zaeem (thinking)", text: "Ek din wo mere liye bajayegi. Maine decide kar liya hai." }
+    { speaker: "Zaeem (thinking)", text: "One day she's going to play it for me. I've decided that." }
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 6: history.
   // --------------------------------------------------------------------
   history: [
-    { speaker: "Bisma", text: "Mujhe history bohot pasand hai. Like actually pasand." },
-    { speaker: "Zaeem", text: "School wali history?" },
-    { speaker: "Bisma", text: "Nahi nahi. Asli wali. Log kaise rehte the, kya pehente the, kya khaate the." },
-    { speaker: "Bisma", text: "Har ek chhoti cheez ke peeche poori kahani hoti hai. Wahi acha lagta hai mujhe." },
-    { speaker: "Zaeem", text: "Tu mar chuke logon ke baare mein aise baat karti hai jaise wo padosi hain." },
-    { speaker: "Bisma", text: "Haan toh?" }
+    { speaker: "Bisma", text: "I really like history. Like, actually like it." },
+    { speaker: "Zaeem", text: "School history?" },
+    { speaker: "Bisma", text: "No, no. The real kind. How people lived, what they wore, what they ate." },
+    { speaker: "Bisma", text: "There's a whole story behind every small thing. That's the part I love." },
+    { speaker: "Zaeem", text: "You talk about dead people like they're neighbours." },
+    { speaker: "Bisma", text: "So?" }
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 7: he points out where he lives.
   // --------------------------------------------------------------------
   my_building: [
-    { speaker: "Zaeem", text: "Wo dekh. Gali ke corner pe." },
-    { speaker: "Bisma", text: "Kaunsi?" },
-    { speaker: "Zaeem", text: "Cream wali. Chhat pe paani ki tanki dikh rahi hai na. Wahan rehta hoon main." },
-    { speaker: "Bisma", text: "Itna paas?!" },
-    { speaker: "Zaeem", text: "Poora saal. Tu group chat mein thi aur main do gali door baitha tha." }
+    { speaker: "Zaeem", text: "Look over there. On the corner of the lane." },
+    { speaker: "Bisma", text: "Which one?" },
+    { speaker: "Zaeem", text: "The cream one. You can see the water tank on the roof. That's where I live." },
+    { speaker: "Bisma", text: "That close?!" },
+    { speaker: "Zaeem", text: "The whole year. You were in the group chat and I was two streets away." }
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 8: Hamid, and the thing about his dad.
   // --------------------------------------------------------------------
   hamid_talk: [
-    { speaker: "Bisma", text: "Achha — tu Hamid ko jaanta hai na?" },
-    { speaker: "Zaeem", text: "Millat Nagar ka Hamid? Sab jaante hain usko." },
-    { speaker: "Bisma", text: "Wo mera close friend hai. Bachpan se." },
-    { speaker: "Zaeem", text: "...achha." },
-    { speaker: "Bisma", text: "Bol na. Kya hai?" },
-    { speaker: "Zaeem", text: "Mere papa ne usko ek baar kuch karte hue pakad liya tha. Usne maafi bhi maang li thi." },
-    { speaker: "Zaeem", text: "Us din se wo mere papa se nafrat karta hai. Maafi khud maangi thi, phir bhi." },
-    { speaker: "Bisma", text: "Haan wo aisa hi hai." },
-    { speaker: "Bisma", text: "Usko mat batana ki wo tere papa hain. Rehne de, waise hi theek hai." },
-    { speaker: "Zaeem", text: "Haan. Rehne dete hain." }
+    { speaker: "Bisma", text: "Wait, you know Hamid, right?" },
+    { speaker: "Zaeem", text: "Millat Nagar's Hamid? Everyone knows him." },
+    { speaker: "Bisma", text: "He's a close friend of mine. Since we were kids." },
+    { speaker: "Zaeem", text: "...ah." },
+    { speaker: "Bisma", text: "Say it. What is it?" },
+    { speaker: "Zaeem", text: "My dad caught him doing something once. He even apologised for it." },
+    { speaker: "Zaeem", text: "He's hated my dad ever since. He apologised himself, and he still hates him." },
+    { speaker: "Bisma", text: "Yeah, that's just how he is." },
+    { speaker: "Bisma", text: "Don't tell him that's your dad. Leave it. It's better that way." },
+    { speaker: "Zaeem", text: "Yeah. Let's leave it." }
   ],
 
   monologue_millat: [
-    { speaker: "Zaeem (thinking)", text: "Yahan har koi sabko jaanta hai. Main bhoolta rehta hoon." },
-    { speaker: "Zaeem (thinking)", text: "Poora saal wo mere phone mein thi. Do gali door rehti thi." }
+    { speaker: "Zaeem (thinking)", text: "Everyone here knows everyone. I keep forgetting that." },
+    { speaker: "Zaeem (thinking)", text: "She was in my phone the whole year. She lived two streets away." }
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 7: leaving.
   // --------------------------------------------------------------------
   leaving: [
-    { speaker: "Bisma", text: "Achha yaar late ho raha hai, mummy call karegi." },
-    { speaker: "Zaeem", text: "Main chhod deta hoon." },
+    { speaker: "Bisma", text: "It's getting late, my mum's going to call." },
+    { speaker: "Zaeem", text: "I'll walk you." },
     { speaker: "Bisma", text: "Zaeem it's literally two minutes." },
-    { speaker: "Zaeem", text: "Toh two minutes lagenge." }
+    { speaker: "Zaeem", text: "Then it'll take two minutes." }
   ],
 
   // --------------------------------------------------------------------
   // #EDIT-DIALOGUE — beat 8: the walk. Two or three minutes, stretched.
   // --------------------------------------------------------------------
   walk_home: [
-    { speaker: "Bisma", text: "Tu hamesha itna dheere chalta hai?" },
-    { speaker: "Zaeem", text: "Haan. Medical condition hai." },
-    { speaker: "Bisma", text: "Jhoot." },
-    { speaker: "Bisma", text: "...ye wali building hai meri." },
+    { speaker: "Bisma", text: "Do you always walk this slowly?" },
+    { speaker: "Zaeem", text: "Yes. It's a medical condition." },
+    { speaker: "Bisma", text: "Liar." },
+    { speaker: "Bisma", text: "...this one's my building." },
     { speaker: "Zaeem", text: "Already?" },
-    { speaker: "Bisma", text: "Bola tha na. Two minutes." },
+    { speaker: "Bisma", text: "I told you. Two minutes." },
     { speaker: "Zaeem", text: "Bad building. Should've been further." },
     { speaker: "Bisma", text: "Goodnight Zaeem." },
     { speaker: "Zaeem", text: "Goodnight Bisma." }
@@ -216,8 +216,8 @@ TME.DataCh4 = {
 
   monologue_after: [
     { speaker: "Zaeem (thinking)", text: "..." },
-    { speaker: "Zaeem (thinking)", text: "Mera ghar pandrah minute door hai." },
-    { speaker: "Zaeem (thinking)", text: "Main chalees lagaunga." }
+    { speaker: "Zaeem (thinking)", text: "My house is fifteen minutes away." },
+    { speaker: "Zaeem (thinking)", text: "I'm going to take forty." }
   ],
 
   // --------------------------------------------------------------------
