@@ -131,13 +131,11 @@ TME.DataCh2 = {
   ],
 
   // --------------------------------------------------------------------
-  // #EDIT-DIALOGUE — beat 2: he notices the table on the right. She has her
-  // back to the road; he can't even see her face yet.
+  // #EDIT-DIALOGUE — beat 2: he notices the table on the right.
   // --------------------------------------------------------------------
   monologue_notice: [
     { speaker: "Zaeem (thinking)", text: "...who is that?" },
-    { speaker: "Zaeem (thinking)", text: "Back to the road. Doesn't even know anyone's looking." },
-    { speaker: "Zaeem (thinking)", text: "I can't even see her face and I'm still looking. Great. Very normal." }
+    { speaker: "Zaeem (thinking)", text: "She hasn't looked over once. She has no idea anyone's watching." }
   ],
 
   // --------------------------------------------------------------------
@@ -155,12 +153,11 @@ TME.DataCh2 = {
   ],
 
   // --------------------------------------------------------------------
-  // #EDIT-DIALOGUE — beat 4: she turns to greet Hamza. This is the first
-  // time Zaeem actually sees her face.
+  // #EDIT-DIALOGUE — beat 4: Hamza reaches their table and she looks up.
   // --------------------------------------------------------------------
   monologue_angel: [
     { speaker: "Zaeem (thinking)", text: "...oh." },
-    { speaker: "Zaeem (thinking)", text: "She turned around." },
+    { speaker: "Zaeem (thinking)", text: "She just looked up." },
     { speaker: "Zaeem (thinking)", text: "...she's looking like an actual angel." },
     { speaker: "Zaeem (thinking)", text: "...people this pretty live in Millat? Wild." }
   ],
@@ -204,8 +201,8 @@ TME.DataCh2 = {
     "He'd known it for months. Bisma — sitting in a group chat between everyone else's names, weighing absolutely nothing.",
     "He just didn't know he'd spent the last twenty minutes staring at her.",
     "He didn't know that in a few months he'd say something careless about a painting and spend two days sick about it.",
-    "For now she was just a girl with her back to the road, at a plastic table outside Al Broaster King. And he was just a boy letting his broast go cold.",
-    "Some stories start with a proper hello. This one started with a name he already had — and a girl who turned around once that afternoon, and not for him."
+    "For now she was just a girl at a plastic table outside Al Broaster King on a Tuesday evening. And he was just a boy letting his broast go cold.",
+    "Some stories start with a proper hello. This one started with a name he already had — and a girl who looked up once that evening, and not for him."
   ],
 
   // --------------------------------------------------------------------

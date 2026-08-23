@@ -7,10 +7,9 @@
 // Al Broaster King, Millat Nagar. Open street-side shop — the pavement with
 // the orange plastic chairs IS the seating, and the road is at the bottom of
 // frame, behind the camera's shoulder. Zaeem and his cousin are at the far
-// left table. Bisma is at the right table with her back to the road, so she's
-// drawn from behind; her friend sits to her left. Hamza walks in from the
-// left, greets Zaeem first, then crosses to their table — and she turns to
-// say salaam, which is the first time Zaeem sees her face.
+// left table. Bisma is at the right table facing the road, with her friend
+// sitting to her right. Hamza walks in from the
+// left, greets Zaeem first, then crosses over to their table.
 //
 // Beat order (this.state):
 //   intro_narration -> settle -> banter -> notice_pan -> notice ->
@@ -43,15 +42,16 @@ TME.Ch2_Restaurant = {
     // Zaeem reuses the Chapter 1 sheet built in main.js.
     this.zaeem  = new TME.AnimatedSprite(TME.zaeemSheet,  92, 352, 46, 62, D.COLORS.ZAEEM);
     this.cousin = new TME.AnimatedSprite(sheets.cousin,  158, 352, 46, 62, D.COLORS.COUSIN);
-    this.bisma  = new TME.AnimatedSprite(sheets.bisma,   648, 320, 46, 62, D.COLORS.BISMA);
+    this.bisma  = new TME.AnimatedSprite(sheets.bisma,   580, 320, 46, 62, D.COLORS.BISMA);
     // broader build than the others — the placeholder scales to w/h
-    this.friend = new TME.AnimatedSprite(sheets.friend,  574, 320, 58, 62, D.COLORS.FRIEND);
+    this.friend = new TME.AnimatedSprite(sheets.friend,  642, 320, 58, 62, D.COLORS.FRIEND);
     this.hamza  = new TME.AnimatedSprite(sheets.hamza,   -60, 366, 46, 62, D.COLORS.HAMZA);
 
     this.zaeem.setAnimation("idle");
     this.cousin.setAnimation("idle");
-    this.bisma.setAnimation("idle-back");    // back to the road
-    this.friend.setAnimation("idle-back");
+    // Facing the road, so Zaeem can see her from his table the whole time.
+    this.bisma.setAnimation("idle");
+    this.friend.setAnimation("idle");
     this.hamza.setAnimation("walk-right");   // he comes in from the left
 
     this.leftTable  = { cx: 146, cy: 412, rx: 62, ry: 16 };
@@ -129,12 +129,10 @@ TME.Ch2_Restaurant = {
       }
     }
 
-    // -- he crosses to hers, and she turns to greet him -------------------
+    // -- he crosses to their table; a beat, then the angel monologue -------
     else if (this.state === "hamza_cross"){
       if (this._moveToward(this.hamza, this.crossTo.x, this.crossTo.y, WALK, dt)){
         this.hamza.setAnimation("idle");
-        this.bisma.setAnimation("idle");     // she turns around
-        this.friend.setAnimation("idle");
         this.state = "turn";
         this.timer = 0;
         this.camTarget = { zoom: 1.2, fx: 690, fy: 356 };
@@ -271,10 +269,10 @@ TME.Ch2_Restaurant = {
     // their shoulders (they're sitting with their backs to us), then table
     this._drawChairLegs(ctx, 603, 386);
     this._drawChairLegs(ctx, 671, 386);
-    this.friend.draw(ctx);
+    this._drawChairBack(ctx, 603, 358, 40);
+    this._drawChairBack(ctx, 671, 358, 48);
     this.bisma.draw(ctx);
-    this._drawChairBack(ctx, 603, 358, 48);
-    this._drawChairBack(ctx, 671, 358, 40);
+    this.friend.draw(ctx);
     if (this.state === "turn" || this.state === "angel" ||
         this.state === "cousin_beat" || this.state === "watching" ||
         this.state === "romantic" || this.state === "fading" ||
@@ -314,6 +312,13 @@ TME.Ch2_Restaurant = {
     this._drawAwning(ctx);
     this._drawShopfront(ctx);
     this._drawPavement(ctx);
+
+    // evening wash over everything, so the open shop stays the one bright
+    // thing in frame. #EDIT: raise/lower the alpha to change the hour.
+    ctx.save();
+    ctx.fillStyle = "rgba(14,18,38,0.34)";
+    ctx.fillRect(0, 0, this.W, this.H);
+    ctx.restore();
   },
 
   _drawSign(ctx){
@@ -377,13 +382,13 @@ TME.Ch2_Restaurant = {
   _drawAwning(ctx){
     // corrugated sheet, only lit from below by the shop's tube lights
     for (let x = 92; x < 876; x += 10){
-      ctx.fillStyle = ((x / 10) | 0) % 2 ? "#4e4a41" : "#413d36";
+      ctx.fillStyle = ((x / 10) | 0) % 2 ? "#33302a" : "#2a2823";
       ctx.fillRect(x, 146, 10, 32);
     }
     ctx.fillStyle = "#2d2a24"; ctx.fillRect(92, 146, 784, 5);
     // the green-yellow beam under it
-    ctx.fillStyle = "#6d7a2c"; ctx.fillRect(92, 178, 784, 10);
-    ctx.fillStyle = "#4d5720"; ctx.fillRect(92, 186, 784, 4);
+    ctx.fillStyle = "#48521e"; ctx.fillRect(92, 178, 784, 10);
+    ctx.fillStyle = "#333a15"; ctx.fillRect(92, 186, 784, 4);
 
     // tube lights along the underside — the reason anything out here is
     // visible at all at this hour
@@ -391,7 +396,7 @@ TME.Ch2_Restaurant = {
       const x = 180 + i * 260;
       ctx.fillStyle = "#fff6d8"; ctx.fillRect(x, 190, 180, 5);
       ctx.save();
-      ctx.globalAlpha = 0.13; ctx.fillStyle = "#ffe9a8";
+      ctx.globalAlpha = 0.07; ctx.fillStyle = "#ffe9a8";
       ctx.beginPath(); ctx.ellipse(x + 90, 208, 150, 46, 0, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
     }
@@ -404,7 +409,7 @@ TME.Ch2_Restaurant = {
 
   _drawShopfront(ctx){
     // weathered concrete face, in shadow at this hour
-    ctx.fillStyle = "#4c453b"; ctx.fillRect(0, 188, 960, 142);
+    ctx.fillStyle = "#332e28"; ctx.fillRect(0, 188, 960, 142);
     ctx.fillStyle = "rgba(0,0,0,0.16)";
     for (let y = 188; y < 330; y += 22) ctx.fillRect(0, y, 960, 2);
 
@@ -429,8 +434,8 @@ TME.Ch2_Restaurant = {
     ctx.fillStyle = "#ded8cd"; ctx.fillRect(306, 288, 84, 38);
 
     // ---- left pillar: the laundry board and the man sat under it ----
-    ctx.fillStyle = "#42392f"; ctx.fillRect(92, 188, 204, 142);
-    ctx.fillStyle = "#b3ada0"; ctx.fillRect(100, 208, 74, 92);
+    ctx.fillStyle = "#2c2721"; ctx.fillRect(92, 188, 204, 142);
+    ctx.fillStyle = "#8b8579"; ctx.fillRect(100, 208, 74, 92);
     ctx.strokeStyle = "#4a4034"; ctx.lineWidth = 2;
     ctx.strokeRect(100, 208, 74, 92);
     ctx.fillStyle = "#8a4467"; ctx.fillRect(104, 212, 66, 12);
@@ -443,7 +448,7 @@ TME.Ch2_Restaurant = {
     ctx.fillStyle = "#1c1410"; ctx.fillRect(110, 266, 18, 8);
 
     // ---- right side: general store, poles, bucket, concrete block ----
-    ctx.fillStyle = "#3b342c"; ctx.fillRect(600, 188, 360, 142);
+    ctx.fillStyle = "#282320"; ctx.fillRect(600, 188, 360, 142);
     // its own strip light, so the hanging packets still read
     ctx.fillStyle = "#fff4d0"; ctx.fillRect(676, 192, 200, 4);
     const packs = ["#a83b2e", "#b8993a", "#3a6fa8", "#4a8a3e", "#a8628a"];
@@ -463,15 +468,15 @@ TME.Ch2_Restaurant = {
   _drawPavement(ctx){
     const H = this.H;
     // astroturf, dark except where the shop light reaches it
-    ctx.fillStyle = "#33401f"; ctx.fillRect(0, 330, 960, 200);
+    ctx.fillStyle = "#1e2714"; ctx.fillRect(0, 330, 960, 200);
     ctx.fillStyle = "rgba(0,0,0,0.10)";
     for (let x = 0; x < 960; x += 7) ctx.fillRect(x, 330, 3, 200);
 
     // pool of warm light spilling out of the open shop
     ctx.save();
-    const spill = ctx.createRadialGradient(446, 330, 20, 446, 330, 330);
-    spill.addColorStop(0, "rgba(255,226,160,0.30)");
-    spill.addColorStop(1, "rgba(255,226,160,0)");
+    const spill = ctx.createRadialGradient(446, 330, 20, 446, 330, 250);
+    spill.addColorStop(0, "rgba(255,220,150,0.20)");
+    spill.addColorStop(1, "rgba(255,220,150,0)");
     ctx.fillStyle = spill;
     ctx.fillRect(0, 330, 960, 200);
     ctx.restore();
@@ -480,8 +485,8 @@ TME.Ch2_Restaurant = {
     for (let y = 336; y < 530; y += 12) ctx.fillRect(0, y, 960, 2);
 
     // kerb, then the road itself — she has her back to this
-    ctx.fillStyle = "#4a463d"; ctx.fillRect(0, 530, 960, 14);
-    ctx.fillStyle = "#1c1b1a"; ctx.fillRect(0, 544, 960, H - 544);
+    ctx.fillStyle = "#33302a"; ctx.fillRect(0, 530, 960, 14);
+    ctx.fillStyle = "#131211"; ctx.fillRect(0, 544, 960, H - 544);
     ctx.fillStyle = "rgba(255,240,200,0.07)";
     for (let x = 20; x < 960; x += 90) ctx.fillRect(x, 572, 46, 4);
   },
